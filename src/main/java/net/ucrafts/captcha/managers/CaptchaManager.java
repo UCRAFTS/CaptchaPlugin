@@ -135,8 +135,8 @@ public class CaptchaManager
 
     public boolean isNeedCaptcha(Player player)
     {
-        if (this.loginPerSecond >= this.config.getInt(ConfigType.CAPTCHA_LOGIN_PER_SECOND.toString())) {
-            return true;
+        if (this.loginPerSecond <= this.config.getInt(ConfigType.CAPTCHA_LOGIN_PER_SECOND.toString())) {
+            return false;
         }
 
         String ip = PlayerUtils.getIP(player);

@@ -15,11 +15,13 @@ CaptchaPlugin
 `redis.timeout` | Максимальное время ожидания в секундах для Redis
 `redis.poolSize` | Максимальный размер пула Redis
 `redis.captcha` | Индекс базы Redis где хранятся сами каптчи в сыром виде
+`redis.cache` | Индекс базы Redis где хранятся сессии игроков
 `captcha.api` | Ссылка на end-point [CaptchaService](https://github.com/UCRAFTS/CaptchaService)
 `captcha.attempts` | Кол-во попыток отгадывания пока игрока не забанит
 `captcha.timeout` | Время ожидания игрока на сервере
 `captcha.redirectServer` | Наименование сервера для последующей телепортации
 `captcha.banTime` | Время бана игрока в минутах
+`captcha.loginPerSecond` | Кол-во допустимых авторизаций в секунду
 `captcha.reloadAfterError` | Перезагружает каптчу для игрока в случае ошибки отгадывания, по умолчанию `true`
 `messages.motd` | Массив сообщения приветствия перед началом загрузки каптчи
 `messages.bossBar` | Наименование на босс-баре

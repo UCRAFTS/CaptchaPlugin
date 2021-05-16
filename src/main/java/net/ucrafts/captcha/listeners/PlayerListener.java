@@ -70,7 +70,12 @@ public class PlayerListener implements Listener
 
         Player player = e.getPlayer();
 
-        Bukkit.getOnlinePlayers().forEach((p) -> p.hidePlayer(player));
+        Bukkit.getOnlinePlayers().forEach((p) -> {
+            if (p != player) {
+                player.hidePlayer(this.plugin, p);
+                p.hidePlayer(this.plugin, player);
+            }
+        });
 
         for (int i = 0; i <= 20; i++) {
             player.sendMessage(" ");
@@ -87,6 +92,8 @@ public class PlayerListener implements Listener
         player.getInventory().clear();
         player.setHealth(1);
         player.setPlayerListName(" ");
+
+        this.captchaManager.updateLoginPerSecond();
 
         if (this.captchaManager.isNeedCaptcha(player)) {
             this.captchaManager.loadCaptcha(player, false);

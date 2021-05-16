@@ -36,11 +36,13 @@ public class Config
         this.config.setDefault(ConfigType.CAPTCHA_RELOAD_AFTER_ERROR.toString(), true);
         this.config.setDefault(ConfigType.CAPTCHA_REDIRECT_SERVER.toString(), "server");
         this.config.setDefault(ConfigType.CAPTCHA_BAN_TIME.toString(), 1);
+        this.config.setDefault(ConfigType.CAPTCHA_LOGIN_PER_SECOND.toString(), 10);
         this.config.setDefault(ConfigType.REDIS_HOST.toString(), "127.0.0.1");
         this.config.setDefault(ConfigType.REDIS_PORT.toString(), 6379);
         this.config.setDefault(ConfigType.REDIS_PASS.toString(), "secret");
         this.config.setDefault(ConfigType.REDIS_TIMEOUT.toString(), 60);
         this.config.setDefault(ConfigType.REDIS_CAPTCHA.toString(), 5);
+        this.config.setDefault(ConfigType.REDIS_SESSION.toString(), 6);
         this.config.setDefault(ConfigType.REDIS_POOL_SIZE.toString(), 20);
         this.config.setDefault(ConfigType.MESSAGE_MOTD.toString(), Arrays.asList(
                 "§cСистема «Я не робот»§8: §7Добро пожаловать!",

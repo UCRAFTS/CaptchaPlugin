@@ -17,7 +17,6 @@ import redis.clients.jedis.JedisPool;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
 
 public class CaptchaManager
 {
@@ -26,9 +25,11 @@ public class CaptchaManager
     private final FlatFile config;
     private final JedisPool jedis;
     private final BossBarManager bossBarManager;
+    private final CacheManager cacheManager;
+    private int loginPerSecond = 0;
+
     public final HashMap<Player, Integer> attempts = new HashMap<>();
     public final HashMap<Player, String> captcha = new HashMap<>();
-    public final HashMap<String, UUID> cache = new HashMap<>();
 
     public CaptchaManager(CaptchaPlugin plugin, JedisPool jedis)
     {
@@ -36,6 +37,17 @@ public class CaptchaManager
         this.config = this.plugin.getCfg();
         this.jedis = jedis;
         this.bossBarManager = this.plugin.getBossBarManager();
+        this.cacheManager = new CacheManager(this.plugin, this.jedis, this.config);
+    }
+
+    public void clearLoginPerSecond()
+    {
+        this.plugin.getServer().getScheduler().runTaskTimer(this.plugin, () -> this.loginPerSecond = 0, 0, 20);
+    }
+
+    public void updateLoginPerSecond()
+    {
+        this.loginPerSecond++;
     }
 
     public void clearPlayer(Player player)
@@ -123,13 +135,17 @@ public class CaptchaManager
 
     public boolean isNeedCaptcha(Player player)
     {
+        if (this.loginPerSecond >= this.config.getInt(ConfigType.CAPTCHA_LOGIN_PER_SECOND.toString())) {
+            return true;
+        }
+
         String ip = PlayerUtils.getIP(player);
 
         if (ip == null) {
             return true;
         }
 
-        return !(this.cache.containsKey(ip) && this.cache.get(ip).equals(player.getUniqueId()));
+        return !this.cacheManager.isCached(player.getUniqueId(), ip);
     }
 
     public boolean hasAttempts(Player player)
@@ -145,7 +161,7 @@ public class CaptchaManager
     {
         if (this.captcha.containsKey(player)) {
             if (this.captcha.get(player).equals(captcha.toLowerCase())) {
-                this.cache.put(PlayerUtils.getIP(player), player.getUniqueId());
+                this.cacheManager.addCache(player.getUniqueId(), PlayerUtils.getIP(player));
                 return true;
             }
         }

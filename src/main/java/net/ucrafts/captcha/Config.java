@@ -36,7 +36,6 @@ public class Config
         this.config.setDefault(ConfigType.CAPTCHA_RELOAD_AFTER_ERROR.toString(), true);
         this.config.setDefault(ConfigType.CAPTCHA_REDIRECT_SERVER.toString(), "server");
         this.config.setDefault(ConfigType.CAPTCHA_BAN_TIME.toString(), 1);
-        this.config.setDefault(ConfigType.CAPTCHA_LOGIN_PER_SECOND.toString(), 10);
         this.config.setDefault(ConfigType.REDIS_HOST.toString(), "127.0.0.1");
         this.config.setDefault(ConfigType.REDIS_PORT.toString(), 6379);
         this.config.setDefault(ConfigType.REDIS_PASS.toString(), "secret");

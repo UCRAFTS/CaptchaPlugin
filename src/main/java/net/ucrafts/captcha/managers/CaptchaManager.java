@@ -26,7 +26,6 @@ public class CaptchaManager
     private final JedisPool jedis;
     private final BossBarManager bossBarManager;
     private final CacheManager cacheManager;
-    private int loginPerSecond = 0;
 
     public final HashMap<Player, Integer> attempts = new HashMap<>();
     public final HashMap<Player, String> captcha = new HashMap<>();
@@ -38,16 +37,6 @@ public class CaptchaManager
         this.jedis = jedis;
         this.bossBarManager = this.plugin.getBossBarManager();
         this.cacheManager = new CacheManager(this.plugin, this.jedis, this.config);
-    }
-
-    public void clearLoginPerSecond()
-    {
-        this.plugin.getServer().getScheduler().runTaskTimer(this.plugin, () -> this.loginPerSecond = 0, 0, 20);
-    }
-
-    public void updateLoginPerSecond()
-    {
-        this.loginPerSecond++;
     }
 
     public void clearPlayer(Player player)
@@ -135,10 +124,6 @@ public class CaptchaManager
 
     public boolean isNeedCaptcha(Player player)
     {
-        if (this.loginPerSecond <= this.config.getInt(ConfigType.CAPTCHA_LOGIN_PER_SECOND.toString())) {
-            return false;
-        }
-
         String ip = PlayerUtils.getIP(player);
 
         if (ip == null) {

@@ -46,8 +46,6 @@ public class CaptchaPlugin extends JavaPlugin
         this.jedis = this.getJedis();
         this.bossBarManager = new BossBarManager(this);
         this.captchaManager = new CaptchaManager(this, this.jedis);
-        this.captchaManager.clearLoginPerSecond();
-
         this.playerManager = new PlayerManager(this);
 
         this.registerListeners();

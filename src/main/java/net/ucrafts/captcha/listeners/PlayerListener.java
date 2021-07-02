@@ -93,8 +93,6 @@ public class PlayerListener implements Listener
         player.setHealth(1);
         player.setPlayerListName(" ");
 
-        this.captchaManager.updateLoginPerSecond();
-
         if (this.captchaManager.isNeedCaptcha(player)) {
             this.captchaManager.loadCaptcha(player, false);
         } else {

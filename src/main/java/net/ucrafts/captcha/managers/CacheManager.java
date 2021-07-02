@@ -48,7 +48,7 @@ public class CacheManager
             Jedis j = this.jedis.getResource();
             j.select(this.config.getInt(ConfigType.REDIS_SESSION.toString()));
             j.set(uuid.toString(), ip);
-            j.expire(uuid.toString(), 86400);
+            j.expire(uuid.toString(), 604800);
             j.close();
         });
     }

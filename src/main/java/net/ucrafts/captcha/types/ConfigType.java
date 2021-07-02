@@ -11,7 +11,6 @@ public enum ConfigType
     MESSAGE_KICK_MESSAGE("messages.kickMessage"),
     MESSAGE_BOSS_BAR("messages.bossBar"),
     CAPTCHA_API("captcha.api"),
-    CAPTCHA_LOGIN_PER_SECOND("captcha.loginPerSecond"),
     REDIS_HOST("redis.host"),
     REDIS_PORT("redis.port"),
     REDIS_TIMEOUT("redis.timeout"),

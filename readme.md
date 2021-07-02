@@ -21,7 +21,6 @@ CaptchaPlugin
 `captcha.timeout` | Время ожидания игрока на сервере
 `captcha.redirectServer` | Наименование сервера для последующей телепортации
 `captcha.banTime` | Время бана игрока в минутах
-`captcha.loginPerSecond` | Кол-во допустимых авторизаций в секунду
 `captcha.reloadAfterError` | Перезагружает каптчу для игрока в случае ошибки отгадывания, по умолчанию `true`
 `messages.motd` | Массив сообщения приветствия перед началом загрузки каптчи
 `messages.bossBar` | Наименование на босс-баре
